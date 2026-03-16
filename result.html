@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Threat Detection Result</title>
+
+<style>
+body{
+    background:#0f172a;
+    font-family:Arial;
+    color:white;
+    text-align:center;
+    padding-top:80px;
+}
+
+.box{
+    background:#1e293b;
+    width:500px;
+    margin:auto;
+    padding:40px;
+    border-radius:10px;
+}
+
+h1{
+    color:#38bdf8;
+}
+
+.stat{
+    font-size:22px;
+    margin:15px;
+}
+
+.threat{
+    color:#ef4444;
+    font-weight:bold;
+}
+
+.safe{
+    color:#22c55e;
+    font-weight:bold;
+}
+
+button{
+    margin-top:20px;
+    padding:12px 25px;
+    border:none;
+    background:#38bdf8;
+    color:white;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+canvas{
+    margin-top:40px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+<h1>AI Threat Detection Result</h1>
+
+<div class="stat">Total Logs: {{ total }}</div>
+
+<div class="stat safe">
+Normal Activity: {{ normal }}
+</div>
+
+<div class="stat threat">
+Threats Detected: {{ threat }}
+</div>
+
+<button onclick="window.location.href='/'">
+Run Again
+</button>
+
+</div>
+
+<canvas id="threatChart" width="400" height="200"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+var normal = (( normal|int ));
+var threat = (( threat|int ));
+
+const ctx = document.getElementById('threatChart').getContext('2d');
+
+new Chart(ctx, {
+    type: 'pie',
+    data: {
+        labels: ['Normal Activity', 'Threats'],
+        datasets: [{
+            data: [normal, threat],
+            backgroundColor: ['#22c55e', '#ef4444']
+        }]
+    }
+});
+
+</script>
+
+</body>
+</html>
